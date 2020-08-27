@@ -46,7 +46,8 @@ public class TaskList {
         if (taskToBeDone  <= getNumberOfTasks()){
             arrayOfTasks.get(taskToBeDone - 1).markAsDone();
             System.out.println("Nice! I've marked this task as done:");
-            System.out.println(" [\u2713]" + arrayOfTasks.get(taskToBeDone - 1).getDescription());
+            System.out.println(" [\u2713]"
+                    + arrayOfTasks.get(taskToBeDone - 1).getDescription());
         }
         else if(taskToBeDone  > getNumberOfTasks()){
             System.out.println("No such task exists in the list!");

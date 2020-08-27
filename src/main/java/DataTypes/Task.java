@@ -9,8 +9,15 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Returns the status of the current task
+     * The default status is a cross
+     * If the task is done it will return a tick
+     *
+     * @return returns a tick or a cross
+     */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     public void markAsDone(){
