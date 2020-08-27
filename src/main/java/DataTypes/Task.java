@@ -1,3 +1,5 @@
+package DataTypes;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -15,11 +17,11 @@ public class Task {
         this.isDone = true;
     }
 
-    public void setDescription(String description){
-        this.description = description;
-    }
-
     public String getDescription(){
         return this.description;
+    }
+
+    public void setDescription(String description){
+        this.description = description;
     }
 }
