@@ -22,15 +22,25 @@ public class Duke {
         boolean checkForBye = false;
         String input;
         Scanner in = new Scanner(System.in);
+        String[] todoList = new String[1000];
+        int numberOfItems = 0;
 
         while (!checkForBye) {
             input = in.nextLine();
             checkForBye = input.equals("bye");
-            if(checkForBye){
+            switch (input) {
+            case "bye":
                 break;
-            }
-            else {
-                System.out.println(input);
+            case "list":
+                for(int i=0;i<numberOfItems;i++){
+                    System.out.println( i+1 +". " + todoList[i]);
+                }
+                break;
+            default:
+                System.out.println("added: " + input);
+                todoList[numberOfItems] = input;
+                numberOfItems++;
+                break;
             }
         }
     }
