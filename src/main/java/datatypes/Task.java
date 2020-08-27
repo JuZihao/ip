@@ -1,4 +1,4 @@
-package DataTypes;
+package datatypes;
 
 public class Task {
     protected String description;
@@ -20,15 +20,15 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 
-    public void setDescription(String description){
+    public void setDescription(String description) {
         this.description = description;
     }
 }

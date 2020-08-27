@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import Functions.TaskList;
+import functions.TaskList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -13,9 +13,9 @@ public class Duke {
             input = in.nextLine();
             if (input.equalsIgnoreCase("bye")) {
                 break;
-            } else if (input.equalsIgnoreCase("list")){
+            } else if (input.equalsIgnoreCase("list")) {
                 currentTaskList.printAllTasks();
-            } else if (input.toLowerCase().contains("done")){
+            } else if (input.toLowerCase().contains("done")) {
                 currentTaskList.setTaskAsDone(input);
             } else {
                 System.out.println("added: " + input);
@@ -37,7 +37,7 @@ public class Duke {
     }
 
 
-    public static void bye(){
+    public static void bye() {
         System.out.println("Bye! Hope to see you soon!");
     }
 }
