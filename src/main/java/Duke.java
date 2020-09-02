@@ -1,4 +1,6 @@
 import java.util.Scanner;
+
+import functions.AnalyseCommand;
 import functions.TaskList;
 
 public class Duke {
@@ -18,8 +20,8 @@ public class Duke {
             } else if (input.toLowerCase().contains("done")) {
                 currentTaskList.setTaskAsDone(input);
             } else {
-                System.out.println("added: " + input);
-                currentTaskList.addTask(input);
+                AnalyseCommand userCommands = new AnalyseCommand(input);
+                currentTaskList.addTask(userCommands.getCommandType(),userCommands.getCommandDescription(),userCommands.getCommandTime());
             }
         }
         bye();
