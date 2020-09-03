@@ -14,8 +14,12 @@ public class AnalyseCommand {
     }
 
     public void setCommandType(String input) {
-        String[] commandType = input.split(" ");
-        this.commandType = commandType[0].toLowerCase();
+        if (input.contains(" ")) {
+            String[] commandType = input.split(" ");
+            this.commandType = commandType[0].toLowerCase();
+        } else {
+            this.commandType = input.toLowerCase();
+        }
     }
 
     public String getCommandType(){
@@ -23,14 +27,16 @@ public class AnalyseCommand {
     }
 
     public void setCommandDescription(String input) {
-        String[] commandDescription = input.split(" ",2);
-
-        if (commandDescription[0].equalsIgnoreCase("deadline") || commandDescription[0].equalsIgnoreCase("event")) {
-            String[] deadlineDescription = commandDescription[1].split("/");
-            this.commandDescription = deadlineDescription[0];
-        }
-        else {
-            this.commandDescription = commandDescription[1];
+        if (input.contains(" ")) {
+            String[] commandDescription = input.split(" ", 2);
+            if (commandDescription[0].equalsIgnoreCase("deadline") || commandDescription[0].equalsIgnoreCase("event")) {
+                String[] descriptionWithoutTime = commandDescription[1].split("/");
+                this.commandDescription = descriptionWithoutTime[0];
+            } else {
+                this.commandDescription = commandDescription[1];
+            }
+        } else {
+            this.commandDescription = "No description";
         }
     }
 
@@ -43,11 +49,23 @@ public class AnalyseCommand {
             String[] commandTime = input.split("/");
             this.commandTime = commandTime[1];
         } else {
-            this.commandTime = "0";
+            this.commandTime = "No Given time";
         }
     }
 
     public String getCommandTime() {
         return this.commandTime;
+    }
+
+    public boolean isBye() {
+        return getCommandType().equals("bye");
+    }
+
+    public boolean isList() {
+        return getCommandType().equals("list");
+    }
+
+    public boolean isDone() {
+        return getCommandType().equals("done");
     }
 }

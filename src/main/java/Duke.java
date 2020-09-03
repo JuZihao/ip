@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 import functions.AnalyseCommand;
 import functions.TaskList;
+import static functions.DefaultMessages.greet;
+import static functions.DefaultMessages.bye;
 
 public class Duke {
     public static void main(String[] args) {
@@ -13,33 +15,19 @@ public class Duke {
 
         while (true) {
             input = in.nextLine();
-            if (input.equalsIgnoreCase("bye")) {
+            AnalyseCommand userCommands = new AnalyseCommand(input);
+            if (userCommands.isBye()) {
                 break;
-            } else if (input.equalsIgnoreCase("list")) {
+            } else if (userCommands.isList()) {
                 currentTaskList.printAllTasks();
-            } else if (input.toLowerCase().contains("done")) {
-                currentTaskList.setTaskAsDone(input);
+            } else if (userCommands.isDone()) {
+                currentTaskList.setTaskAsDone(userCommands.getCommandDescription());
             } else {
-                AnalyseCommand userCommands = new AnalyseCommand(input);
                 currentTaskList.addTask(userCommands.getCommandType(),userCommands.getCommandDescription(),userCommands.getCommandTime());
             }
         }
+
         bye();
     }
 
-    public static void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-    }
-
-
-    public static void bye() {
-        System.out.println("Bye! Hope to see you soon!");
-    }
 }

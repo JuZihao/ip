@@ -76,14 +76,13 @@ public class TaskList {
     }
 
     public void setTaskAsDone(String input) {
-        String[] in = input.split(" ");
-        int taskToBeDone = Integer.parseInt(in[1]);
+        int taskToBeDone = Integer.parseInt(input);
 
         if (taskToBeDone  <= getNumberOfTasks()) {
             arrayOfTasks.get(taskToBeDone - 1).markAsDone();
             System.out.println("Nice! I've marked this task as done:");
             System.out.println(arrayOfTasks.get(taskToBeDone - 1).toString());
-        } else if (taskToBeDone  > getNumberOfTasks()){
+        } else if (taskToBeDone  > getNumberOfTasks()) {
             System.out.println("No such task exists in the list!");
         } else {
             System.out.println("Invalid input!");
