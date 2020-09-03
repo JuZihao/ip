@@ -7,6 +7,7 @@ REM delete output from previous run
 del ACTUAL.TXT
 
 REM compile the code into the bin folder
+javac  -cp ..\bin -Xlint:none -d ..\bin ..\src\main\java\functions\DefaultMessages.java
 javac  -cp ..\bin -Xlint:none -d ..\bin ..\src\main\java\functions\AnalyseCommand.java
 javac  -cp ..\bin -Xlint:none -d ..\bin ..\src\main\java\datatypes\Task.java
 javac  -cp ..\bin -Xlint:none -d ..\bin ..\src\main\java\datatypes\Todo.java
