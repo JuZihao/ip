@@ -10,7 +10,6 @@ public class AnalyseCommand {
         setCommandType(input);
         setCommandDescription(input);
         setCommandTime(input);
-
     }
 
     public void setCommandType(String input) {
@@ -29,7 +28,7 @@ public class AnalyseCommand {
     public void setCommandDescription(String input) {
         if (input.contains(" ")) {
             String[] commandDescription = input.split(" ", 2);
-            if (commandDescription[0].equalsIgnoreCase("deadline") || commandDescription[0].equalsIgnoreCase("event")) {
+            if (isEvent()||isDeadline()) {
                 String[] descriptionWithoutTime = commandDescription[1].split("/");
                 this.commandDescription = descriptionWithoutTime[0];
             } else {
@@ -68,4 +67,18 @@ public class AnalyseCommand {
     public boolean isDone() {
         return getCommandType().equals("done");
     }
+
+    public boolean isToDo() {
+        return getCommandType().equals("todo");
+    }
+
+    public boolean isEvent() {
+        return getCommandType().equals("event");
+    }
+
+    public boolean isDeadline() {
+        return getCommandType().equals("deadline");
+    }
+
+
 }

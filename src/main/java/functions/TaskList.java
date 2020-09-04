@@ -4,7 +4,6 @@ import datatypes.Deadline;
 import datatypes.Event;
 import datatypes.Task;
 import datatypes.Todo;
-
 import java.util.ArrayList;
 
 public class TaskList {
@@ -35,25 +34,25 @@ public class TaskList {
         }
     }
 
-    public void addTask(String commandType, String commandDescription, String commandTime) {
+    public void addTask(AnalyseCommand usercommands) {
 
         Task newTask;
 
-        switch (commandType) {
+        switch (usercommands.getCommandType()) {
         case "todo":
-            newTask= new Todo(commandDescription);
+            newTask= new Todo(usercommands.getCommandDescription());
             arrayOfTasks.add(newTask);
             setNumberOfTasks(getNumberOfTasks()+1);
             printAddTaskMessage(newTask);
             break;
         case "deadline":
-            newTask= new Deadline(commandDescription,commandTime);
+            newTask= new Deadline(usercommands.getCommandDescription(), usercommands.getCommandTime());
             arrayOfTasks.add(newTask);
             setNumberOfTasks(getNumberOfTasks()+1);
             printAddTaskMessage(newTask);
             break;
         case "event":
-            newTask= new Event(commandDescription,commandTime);
+            newTask= new Event(usercommands.getCommandDescription(), usercommands.getCommandTime());
             arrayOfTasks.add(newTask);
             setNumberOfTasks(getNumberOfTasks()+1);
             printAddTaskMessage(newTask);

@@ -12,7 +12,6 @@ public class Duke {
         TaskList currentTaskList = new TaskList();
 
         greet();
-
         while (true) {
             input = in.nextLine();
             AnalyseCommand userCommands = new AnalyseCommand(input);
@@ -23,11 +22,9 @@ public class Duke {
             } else if (userCommands.isDone()) {
                 currentTaskList.setTaskAsDone(userCommands.getCommandDescription());
             } else {
-                currentTaskList.addTask(userCommands.getCommandType(),userCommands.getCommandDescription(),userCommands.getCommandTime());
+                currentTaskList.addTask(userCommands);
             }
         }
-
         bye();
     }
-
 }

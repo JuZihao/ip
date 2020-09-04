@@ -13,7 +13,6 @@ public class DefaultMessages {
         System.out.println("What can I do for you?");
     }
 
-
     public static void bye() {
         System.out.println("Bye! Hope to see you soon!");
     }
