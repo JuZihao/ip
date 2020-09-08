@@ -26,7 +26,9 @@ public class AnalyseCommand {
     }
 
     public void setCommandDescription(String input) {
-        if (input.contains(" ")) {
+        if (isBye()||isList()) {
+            this.commandDescription = "No description";
+        } else {
             String[] commandDescription = input.split(" ", 2);
             if (isEvent()||isDeadline()) {
                 String[] descriptionWithoutTime = commandDescription[1].split("/");
@@ -34,8 +36,6 @@ public class AnalyseCommand {
             } else {
                 this.commandDescription = commandDescription[1];
             }
-        } else {
-            this.commandDescription = "No description";
         }
     }
 
