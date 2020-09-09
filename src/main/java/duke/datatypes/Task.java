@@ -1,4 +1,4 @@
-package datatypes;
+package duke.datatypes;
 
 public abstract class Task {
     protected String description;

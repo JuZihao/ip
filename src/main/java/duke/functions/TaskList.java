@@ -1,9 +1,9 @@
-package functions;
+package duke.functions;
 
-import datatypes.Deadline;
-import datatypes.Event;
-import datatypes.Task;
-import datatypes.Todo;
+import duke.datatypes.Deadline;
+import duke.datatypes.Event;
+import duke.datatypes.Task;
+import duke.datatypes.Todo;
 import java.util.ArrayList;
 
 public class TaskList {

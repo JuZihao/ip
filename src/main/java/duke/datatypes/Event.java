@@ -1,4 +1,4 @@
-package datatypes;
+package duke.datatypes;
 
 public class Event extends Task {
 
