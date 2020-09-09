@@ -2,14 +2,16 @@ package functions;
 
 public class AnalyseCommand {
 
+    private final String ERROR_COMMAND = "ERROR";
+
     protected String commandType;
     protected String commandDescription;
     protected String commandTime;
 
     public AnalyseCommand(String input) {
-        setCommandType(input);
-        setCommandDescription(input);
-        setCommandTime(input);
+        setCommandType(input.trim());
+        setCommandDescription(input.trim());
+        setCommandTime(input.trim());
     }
 
     public void setCommandType(String input) {
@@ -26,16 +28,25 @@ public class AnalyseCommand {
     }
 
     public void setCommandDescription(String input) {
-        if (isBye()||isList()) {
-            this.commandDescription = "No description";
-        } else {
-            String[] commandDescription = input.split(" ", 2);
-            if (isEvent()||isDeadline()) {
+        if (isEvent()||isDeadline()) {
+            try {
+                String[] commandDescription = input.trim().split(" ", 2);
                 String[] descriptionWithoutTime = commandDescription[1].split("/");
                 this.commandDescription = descriptionWithoutTime[0];
-            } else {
-                this.commandDescription = commandDescription[1];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("OOPS!!! The description of a " + getCommandType() + " cannot be empty.");
+                setCommandType(ERROR_COMMAND);
             }
+        } else if (isToDo()||isDone()) {
+            try {
+                String[] commandDescription = input.trim().split(" ", 2);
+                this.commandDescription = commandDescription[1];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("OOPS!!! The description of a " + getCommandType() + " cannot be empty.");
+                setCommandType(ERROR_COMMAND);
+            }
+        } else {
+            this.commandDescription = "No description!";
         }
     }
 
@@ -48,7 +59,7 @@ public class AnalyseCommand {
             String[] commandTime = input.split("/");
             this.commandTime = commandTime[1];
         } else {
-            this.commandTime = "No Given time";
+            this.commandTime = "No Given time!";
         }
     }
 

@@ -57,8 +57,11 @@ public class TaskList {
             setNumberOfTasks(getNumberOfTasks()+1);
             printAddTaskMessage(newTask);
             break;
+        case "error":
+            System.out.println("Please enter your command again!");
+            break;
         default:
-            System.out.println("No such commands!");
+            System.out.println("OOPS!! I'm sorry, but I don't know what that means :-(");
             break;
         }
 
@@ -75,15 +78,14 @@ public class TaskList {
     }
 
     public void setTaskAsDone(String input) {
-        int taskToBeDone = Integer.parseInt(input);
-
-        if (taskToBeDone  <= getNumberOfTasks()) {
+        try {
+            int taskToBeDone = Integer.parseInt(input);
             arrayOfTasks.get(taskToBeDone - 1).markAsDone();
             System.out.println("Nice! I've marked this task as done:");
             System.out.println(arrayOfTasks.get(taskToBeDone - 1).toString());
-        } else if (taskToBeDone  > getNumberOfTasks()) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("No such task exists in the list!");
-        } else {
+        } catch (NumberFormatException e) {
             System.out.println("Invalid input!");
             System.out.println("Please key in your input in the format:");
             System.out.println("done 1");
