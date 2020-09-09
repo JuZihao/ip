@@ -1,4 +1,4 @@
-package datatypes;
+package duke.datatypes;
 
 public abstract class Task {
     protected String description;
@@ -22,6 +22,10 @@ public abstract class Task {
 
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public boolean getIsDone() {
+        return isDone;
     }
 
     public String getDescription() {

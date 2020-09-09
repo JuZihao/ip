@@ -1,9 +1,10 @@
-import java.util.Scanner;
+package duke;
 
-import functions.AnalyseCommand;
-import functions.TaskList;
-import static functions.DefaultMessages.greet;
-import static functions.DefaultMessages.bye;
+import java.util.Scanner;
+import duke.functions.AnalyseCommand;
+import duke.functions.TaskList;
+import static duke.functions.DefaultMessages.greet;
+import static duke.functions.DefaultMessages.bye;
 
 public class Duke {
     public static void main(String[] args) {
