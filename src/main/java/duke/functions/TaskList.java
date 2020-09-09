@@ -24,7 +24,7 @@ public class TaskList {
 
     public void printAllTasks() {
         if(arrayOfTasks.isEmpty()) {
-            System.out.println("No tasks added yet!");
+            System.out.println("OOPS!!! No task added yet.");
         } else {
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i<arrayOfTasks.size();i++){
@@ -80,13 +80,18 @@ public class TaskList {
     public void setTaskAsDone(String input) {
         try {
             int taskToBeDone = Integer.parseInt(input);
-            arrayOfTasks.get(taskToBeDone - 1).markAsDone();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(arrayOfTasks.get(taskToBeDone - 1).toString());
+            if(arrayOfTasks.get(taskToBeDone -1).getIsDone()) {
+                System.out.println("OOPS!!! Looks like this task is done.");
+                System.out.println("Please try another task.");
+            } else {
+                arrayOfTasks.get(taskToBeDone - 1).markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(arrayOfTasks.get(taskToBeDone - 1).toString());
+            }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("No such task exists in the list!");
+            System.out.println("OOPS!!! No such task exists in the list.");
         } catch (NumberFormatException e) {
-            System.out.println("Invalid input!");
+            System.out.println("OOPS!!! Looks like this is an invalid input.");
             System.out.println("Please key in your input in the format:");
             System.out.println("done 1");
         }
