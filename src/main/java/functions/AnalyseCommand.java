@@ -4,6 +4,7 @@ public class AnalyseCommand {
 
     private final String ERROR_COMMAND = "ERROR";
 
+
     protected String commandType;
     protected String commandDescription;
     protected String commandTime;
@@ -34,7 +35,8 @@ public class AnalyseCommand {
                 String[] descriptionWithoutTime = commandDescription[1].split("/");
                 this.commandDescription = descriptionWithoutTime[0];
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("OOPS!!! The description of a " + getCommandType() + " cannot be empty.");
+                String article = isEvent() ? " an " : " a ";
+                System.out.println("OOPS!!! The description of" + article + getCommandType() + " cannot be empty.");
                 setCommandType(ERROR_COMMAND);
             }
         } else if (isToDo()||isDone()) {
@@ -55,9 +57,15 @@ public class AnalyseCommand {
     }
 
     public void setCommandTime(String input) {
-        if (input.contains("/")) {
-            String[] commandTime = input.split("/");
-            this.commandTime = commandTime[1];
+        if (isDeadline()||isEvent()) {
+            try {
+                String[] commandTime = input.split("/");
+                this.commandTime = commandTime[1];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                String article = isEvent() ? " an " : " a ";
+                System.out.println("OOPS!!! The time of" + article + getCommandType() + " cannot be empty.");
+                setCommandType(ERROR_COMMAND);
+            }
         } else {
             this.commandTime = "No Given time!";
         }
