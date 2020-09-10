@@ -1,19 +1,12 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
 Hello! I'm Duke
 What can I do for you?
-No such task exists in the list!
-Invalid input!
+OOPS!!! No such task exists in the list.
+OOPS!!! Looks like this is an invalid input.
 Please key in your input in the format:
 done 1
 OOPS!!! The description of a done cannot be empty.
 Please enter your command again!
-No tasks added yet!
+OOPS!!! No task added yet.
 OOPS!!! The description of a todo cannot be empty.
 Please enter your command again!
 OOPS!!! The description of an event cannot be empty.
@@ -43,6 +36,8 @@ Nice! I've marked this task as done:
 [E][?] project meeting (at: Mon 2-4pm)
 Nice! I've marked this task as done:
 [D][?] return book (by: Sunday)
+OOPS!!! Looks like this task is done.
+Please try another task.
 Here are the tasks in your list:
 1.[T][?] borrow book
 2.[E][?] project meeting (at: Mon 2-4pm)
