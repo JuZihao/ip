@@ -39,7 +39,7 @@ public class AnalyseCommand {
                 System.out.println("OOPS!!! The description of" + article + getCommandType() + " cannot be empty.");
                 setCommandType(ERROR_COMMAND);
             }
-        } else if (isToDo()||isDone()) {
+        } else if (isToDo()||isDone()||isDelete()) {
             try {
                 String[] commandDescription = input.trim().split(" ", 2);
                 this.commandDescription = commandDescription[1];
@@ -98,6 +98,11 @@ public class AnalyseCommand {
     public boolean isDeadline() {
         return getCommandType().equals("deadline");
     }
+
+    public boolean isDelete() {
+        return getCommandType().equals("delete");
+    }
+
 
 
 }

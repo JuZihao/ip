@@ -42,19 +42,19 @@ public class TaskList {
         case "todo":
             newTask= new Todo(usercommands.getCommandDescription());
             arrayOfTasks.add(newTask);
-            setNumberOfTasks(getNumberOfTasks()+1);
+            setNumberOfTasks(getNumberOfTasks() + 1);
             printAddTaskMessage(newTask);
             break;
         case "deadline":
             newTask= new Deadline(usercommands.getCommandDescription(), usercommands.getCommandTime());
             arrayOfTasks.add(newTask);
-            setNumberOfTasks(getNumberOfTasks()+1);
+            setNumberOfTasks(getNumberOfTasks() + 1);
             printAddTaskMessage(newTask);
             break;
         case "event":
             newTask= new Event(usercommands.getCommandDescription(), usercommands.getCommandTime());
             arrayOfTasks.add(newTask);
-            setNumberOfTasks(getNumberOfTasks()+1);
+            setNumberOfTasks(getNumberOfTasks() + 1);
             printAddTaskMessage(newTask);
             break;
         case "error":
@@ -64,7 +64,6 @@ public class TaskList {
             System.out.println("OOPS!! I'm sorry, but I don't know what that means :-(");
             break;
         }
-
     }
 
     private void printAddTaskMessage(Task newTask) {
@@ -76,6 +75,32 @@ public class TaskList {
             System.out.println("Now you have " + getNumberOfTasks() + " tasks in the list.");
         }
     }
+
+    public void deleteTask(String usercommands) {
+        try {
+            int taskToBeDeleted = Integer.parseInt(usercommands);
+            printDeleteTaskMessage(arrayOfTasks.get(taskToBeDeleted - 1));
+            arrayOfTasks.remove(taskToBeDeleted - 1);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("OOPS!!! No such task exists in the list.");
+        } catch (NumberFormatException e) {
+            System.out.println("OOPS!!! Looks like this is an invalid input.");
+            System.out.println("Please key in your input in the format:");
+            System.out.println("delete 1");
+        }
+    }
+
+    private void printDeleteTaskMessage(Task taskToBeDeleted) {
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + taskToBeDeleted.toString());
+        setNumberOfTasks(getNumberOfTasks() - 1);
+        if (getNumberOfTasks() < 2) {
+            System.out.println("Now you have " + getNumberOfTasks() + " task in the list.");
+        } else {
+            System.out.println("Now you have " + getNumberOfTasks() + " tasks in the list.");
+        }
+    }
+
 
     public void setTaskAsDone(String input) {
         try {
