@@ -1,12 +1,15 @@
 done 1
 done a
 done
+delete 1
+delete a
+delete
 list
 todo
 event
 deadline
-event project meeting 
-deadline return book 
+event project meeting /2-4pm
+deadline return book /Sunday
 todo borrow book
 event project meeting /at Mon 2-4pm
 deadline return book /by Sunday
@@ -15,6 +18,11 @@ done 1
 done 2
 done 3
 done 1
+list
+delete 3
+delete 2
+delete 1
+delete 1
 list
 blah
 bye
