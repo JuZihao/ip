@@ -9,6 +9,16 @@ public class Todo extends Task {
     }
 
     @Override
+    public String getTaskSign() {
+        return TODO_SIGN;
+    }
+
+    @Override
+    public String getTime() {
+        return null;
+    }
+
+    @Override
     public String toString() {
         return TODO_SIGN + super.toString();
     }

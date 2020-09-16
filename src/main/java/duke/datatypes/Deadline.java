@@ -11,7 +11,7 @@ public class Deadline extends Task {
     }
 
     public void setDeadlineBy(String deadlineBy) {
-        String by = deadlineBy.replace("by","by:");
+        String by = deadlineBy.replace("by ","");
         this.deadlineBy = by;
     }
 
@@ -20,7 +20,17 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getTaskSign() {
+        return DEADLINE_SIGN;
+    }
+
+    @Override
+    public String getTime() {
+        return getDeadlineBy();
+    }
+
+    @Override
     public String toString() {
-        return DEADLINE_SIGN + super.toString() + "(" + getDeadlineBy() + ")";
+        return DEADLINE_SIGN + super.toString() + "(by: " + getDeadlineBy() + ")";
     }
 }

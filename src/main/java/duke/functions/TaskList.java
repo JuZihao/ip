@@ -1,13 +1,16 @@
 package duke.functions;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
 import duke.datatypes.Deadline;
 import duke.datatypes.Event;
 import duke.datatypes.Task;
 import duke.datatypes.Todo;
-import java.util.ArrayList;
 
 public class TaskList {
-    private final ArrayList<Task> arrayOfTasks = new ArrayList<>();
+    private ArrayList<Task> arrayOfTasks = new ArrayList<>();
+    private FileIO savedTextFile = new FileIO("savedtasklist.txt");
     private int numberOfTasks;
 
     public TaskList() {
@@ -119,6 +122,24 @@ public class TaskList {
             System.out.println("OOPS!!! Looks like this is an invalid input.");
             System.out.println("Please key in your input in the format:");
             System.out.println("done 1");
+        }
+    }
+
+    public void saveTasksAsText() {
+        try {
+            savedTextFile.saveAsTextFile(arrayOfTasks);
+            System.out.println("Done! All tasks saved!");
+        } catch (IOException e) {
+            System.out.println("OOPS!!! Looks like there is an error saving tasks.");
+        }
+    }
+
+    public void loadSavedTasks() {
+        try {
+            arrayOfTasks = savedTextFile.loadSavedFile();
+            System.out.println("Done! All tasks loaded!");
+        } catch (FileNotFoundException e) {
+            System.out.println("The file you try to load does not exist!");
         }
     }
 }

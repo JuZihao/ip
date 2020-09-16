@@ -11,7 +11,7 @@ public class Event extends Task {
     }
 
     public void setEventAt(String eventAt) {
-        String at = eventAt.replace("at","at:");
+        String at = eventAt.replace("at ","");
         this.eventAt = at;
     }
 
@@ -20,7 +20,17 @@ public class Event extends Task {
     }
 
     @Override
+    public String getTaskSign() {
+        return EVENT_SIGN;
+    }
+
+    @Override
+    public String getTime() {
+        return getEventAt();
+    }
+
+    @Override
     public String toString() {
-        return EVENT_SIGN + super.toString() + "(" + getEventAt() + ")";
+        return EVENT_SIGN + super.toString() + "(at: " + getEventAt() + ")";
     }
 }

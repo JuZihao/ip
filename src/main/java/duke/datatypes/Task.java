@@ -36,6 +36,11 @@ public abstract class Task {
         this.description = description;
     }
 
+    public abstract String getTaskSign();
+
+    public abstract String getTime();
+
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "]" + " " + getDescription();

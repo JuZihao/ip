@@ -34,7 +34,7 @@ public class AnalyseCommand {
         if (isEvent()||isDeadline()) {
             try {
                 String[] commandDescription = input.trim().split(" ", 2);
-                String[] descriptionWithoutTime = commandDescription[1].split("/");
+                String[] descriptionWithoutTime = commandDescription[1].split(" /");
                 this.commandDescription = descriptionWithoutTime[0];
             } catch (ArrayIndexOutOfBoundsException e) {
                 String article = isEvent() ? " an " : " a ";

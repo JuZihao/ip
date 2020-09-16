@@ -13,6 +13,8 @@ public class Duke {
         TaskList currentTaskList = new TaskList();
 
         greet();
+        currentTaskList.loadSavedTasks();
+
         while (true) {
             input = in.nextLine();
             AnalyseCommand userCommands = new AnalyseCommand(input);
@@ -28,6 +30,7 @@ public class Duke {
                 currentTaskList.addTask(userCommands);
             }
         }
+        currentTaskList.saveTasksAsText();
         bye();
     }
 }
