@@ -93,7 +93,7 @@ public class FileIO {
             default:
                 break;
             }
-            if (isDone.equals("1")) {
+            if (isDone.trim().equals("1")) {
                 savedTaskToAdd.markAsDone();
             }
             arrayOfTasks.add(savedTaskToAdd);

@@ -10,7 +10,7 @@ import duke.datatypes.Todo;
 
 public class TaskList {
     private ArrayList<Task> arrayOfTasks = new ArrayList<>();
-    private FileIO savedTextFile = new FileIO("savedtasklist.txt");
+    private final FileIO savedTextFile = new FileIO("data/savedtasklist.txt");
     private int numberOfTasks;
 
     public TaskList() {
@@ -137,6 +137,7 @@ public class TaskList {
     public void loadSavedTasks() {
         try {
             arrayOfTasks = savedTextFile.loadSavedFile();
+            setNumberOfTasks(arrayOfTasks.size());
             System.out.println("Done! All tasks loaded!");
         } catch (FileNotFoundException e) {
             System.out.println("The file you try to load does not exist!");
