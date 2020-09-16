@@ -35,7 +35,7 @@ public class AnalyseCommand {
             try {
                 String[] commandDescription = input.trim().split(" ", 2);
                 String[] descriptionWithoutTime = commandDescription[1].split(" /");
-                this.commandDescription = descriptionWithoutTime[0];
+                this.commandDescription = descriptionWithoutTime[0].trim();
             } catch (ArrayIndexOutOfBoundsException e) {
                 String article = isEvent() ? " an " : " a ";
                 System.out.println("OOPS!!! The description of" + article + getCommandType() + " cannot be empty.");
@@ -63,7 +63,7 @@ public class AnalyseCommand {
             String timeSeparator = isDeadline() ? DEADLINE_SEPARATOR:EVENT_SEPARATOR;
             try {
                 String[] commandTime = input.split(timeSeparator);
-                this.commandTime = commandTime[1];
+                this.commandTime = commandTime[1].trim();
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("OOPS!!! The time of your " + getCommandType() + " is invalid.");
                 setCommandType(ERROR_COMMAND);

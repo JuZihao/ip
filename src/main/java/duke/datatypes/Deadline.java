@@ -31,6 +31,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return DEADLINE_SIGN + super.toString() + "(by: " + getDeadlineBy() + ")";
+        return DEADLINE_SIGN + super.toString() + " (by: " + getDeadlineBy() + ")";
     }
 }
