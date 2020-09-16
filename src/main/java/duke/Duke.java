@@ -22,6 +22,8 @@ public class Duke {
                 currentTaskList.printAllTasks();
             } else if (userCommands.isDone()) {
                 currentTaskList.setTaskAsDone(userCommands.getCommandDescription());
+            } else if (userCommands.isDelete()) {
+                currentTaskList.deleteTask(userCommands.getCommandDescription());
             } else {
                 currentTaskList.addTask(userCommands);
             }

@@ -3,6 +3,8 @@ package duke.functions;
 public class AnalyseCommand {
 
     private final String ERROR_COMMAND = "ERROR";
+    private final String EVENT_SEPARATOR = "/at";
+    private final String DEADLINE_SEPARATOR = "/by";
 
 
     protected String commandType;
@@ -39,7 +41,7 @@ public class AnalyseCommand {
                 System.out.println("OOPS!!! The description of" + article + getCommandType() + " cannot be empty.");
                 setCommandType(ERROR_COMMAND);
             }
-        } else if (isToDo()||isDone()) {
+        } else if (isToDo()||isDone()||isDelete()) {
             try {
                 String[] commandDescription = input.trim().split(" ", 2);
                 this.commandDescription = commandDescription[1];
@@ -58,12 +60,12 @@ public class AnalyseCommand {
 
     public void setCommandTime(String input) {
         if (isDeadline()||isEvent()) {
+            String timeSeparator = isDeadline() ? DEADLINE_SEPARATOR:EVENT_SEPARATOR;
             try {
-                String[] commandTime = input.split("/");
+                String[] commandTime = input.split(timeSeparator);
                 this.commandTime = commandTime[1];
             } catch (ArrayIndexOutOfBoundsException e) {
-                String article = isEvent() ? " an " : " a ";
-                System.out.println("OOPS!!! The time of" + article + getCommandType() + " cannot be empty.");
+                System.out.println("OOPS!!! The time of your " + getCommandType() + " is invalid.");
                 setCommandType(ERROR_COMMAND);
             }
         } else {
@@ -98,6 +100,11 @@ public class AnalyseCommand {
     public boolean isDeadline() {
         return getCommandType().equals("deadline");
     }
+
+    public boolean isDelete() {
+        return getCommandType().equals("delete");
+    }
+
 
 
 }
