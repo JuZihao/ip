@@ -3,8 +3,11 @@ package duke;
 import java.util.Scanner;
 import duke.functions.AnalyseCommand;
 import duke.functions.TaskList;
-import static duke.functions.DefaultMessages.greet;
-import static duke.functions.DefaultMessages.bye;
+
+import static duke.functions.AnalyseCommand.isBye;
+import static duke.functions.AnalyseCommand.isList;
+import static duke.functions.Ui.showGreet;
+import static duke.functions.Ui.showBye;
 
 public class Duke {
     public static void main(String[] args) {
@@ -12,15 +15,15 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         TaskList currentTaskList = new TaskList();
 
-        greet();
+        showGreet();
         currentTaskList.loadSavedTasks();
 
         while (true) {
             input = in.nextLine();
             AnalyseCommand userCommands = new AnalyseCommand(input);
-            if (userCommands.isBye()) {
+            if (isBye(input)) {
                 break;
-            } else if (userCommands.isList()) {
+            } else if (isList(input)) {
                 currentTaskList.printAllTasks();
             } else if (userCommands.isDone()) {
                 currentTaskList.setTaskAsDone(userCommands.getCommandDescription());
@@ -31,6 +34,6 @@ public class Duke {
             }
         }
         currentTaskList.saveTasksAsText();
-        bye();
+        showBye();
     }
 }

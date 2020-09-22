@@ -2,30 +2,55 @@ package duke.functions;
 
 public class AnalyseCommand {
 
-    private final String ERROR_COMMAND = "ERROR";
-    private final String EVENT_SEPARATOR = "/at";
-    private final String DEADLINE_SEPARATOR = "/by";
-
-
     protected String commandType;
     protected String commandDescription;
     protected String commandTime;
 
+    private static final String BYE_COMMAND = "BYE";
+    private static final String LIST_COMMAND = "LIST";
+    private final String DONE_COMMAND = "DONE";
+    private final String TODO_COMMAND = "TODO";
+    private final String EVENT_COMMAND = "EVENT";
+    private final String DEADLINE_COMMAND = "DEADLINE";
+    private final String DELETE_COMMAND = "DELETE";
+
+    /** Set any command that is not valid to ERROR */
+    private final String ERROR_COMMAND = "ERROR";
+    /** String to separate the time from the whole event command */
+    private final String EVENT_SEPARATOR = "/at";
+    /** String to separate the time from the whole deadline command */
+    private final String DEADLINE_SEPARATOR = "/by";
+
+    /**
+     * User's input is being analysed and split into different part.
+     *
+     * @param input User's input
+     */
     public AnalyseCommand(String input) {
         setCommandType(input.trim());
         setCommandDescription(input.trim());
         setCommandTime(input.trim());
     }
 
+    /**
+     * Split user's input and get the command type.
+     *
+     * @param input User's input
+     */
     public void setCommandType(String input) {
         if (input.contains(" ")) {
             String[] commandType = input.split(" ");
             this.commandType = commandType[0].toLowerCase();
         } else {
-            this.commandType = input.toLowerCase();
+            this.commandType = input.toUpperCase();
         }
     }
 
+    /**
+     * Returns the command type given by the user.
+     *
+     * @return User's input command type
+     */
     public String getCommandType(){
         return this.commandType;
     }
@@ -77,32 +102,32 @@ public class AnalyseCommand {
         return this.commandTime;
     }
 
-    public boolean isBye() {
-        return getCommandType().equals("bye");
+    public static boolean isBye(String input) {
+        return input.trim().toUpperCase().equals(BYE_COMMAND);
     }
 
-    public boolean isList() {
-        return getCommandType().equals("list");
+    public static boolean isList(String input) {
+        return input.trim().toUpperCase().equals(LIST_COMMAND);
     }
 
     public boolean isDone() {
-        return getCommandType().equals("done");
+        return getCommandType().equals(DONE_COMMAND);
     }
 
     public boolean isToDo() {
-        return getCommandType().equals("todo");
+        return getCommandType().equals(TODO_COMMAND);
     }
 
     public boolean isEvent() {
-        return getCommandType().equals("event");
+        return getCommandType().equals(EVENT_COMMAND);
     }
 
     public boolean isDeadline() {
-        return getCommandType().equals("deadline");
+        return getCommandType().equals(DEADLINE_COMMAND);
     }
 
     public boolean isDelete() {
-        return getCommandType().equals("delete");
+        return getCommandType().equals(DELETE_COMMAND);
     }
 
 

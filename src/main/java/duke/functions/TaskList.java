@@ -13,6 +13,13 @@ public class TaskList {
     private final FileIO savedTextFile = new FileIO("data/savedtasklist.txt");
     private int numberOfTasks;
 
+    private final String DONE_COMMAND = "DONE";
+    private final String TODO_COMMAND = "TODO";
+    private final String EVENT_COMMAND = "EVENT";
+    private final String DEADLINE_COMMAND = "DEADLINE";
+    private final String DELETE_COMMAND = "DELETE";
+    private final String ERROR_COMMAND = "ERROR";
+
     public TaskList() {
         setNumberOfTasks(0);
     }
@@ -42,25 +49,25 @@ public class TaskList {
         Task newTask;
 
         switch (usercommands.getCommandType()) {
-        case "todo":
+        case TODO_COMMAND:
             newTask= new Todo(usercommands.getCommandDescription());
             arrayOfTasks.add(newTask);
             setNumberOfTasks(getNumberOfTasks() + 1);
             printAddTaskMessage(newTask);
             break;
-        case "deadline":
+        case DEADLINE_COMMAND:
             newTask= new Deadline(usercommands.getCommandDescription(), usercommands.getCommandTime());
             arrayOfTasks.add(newTask);
             setNumberOfTasks(getNumberOfTasks() + 1);
             printAddTaskMessage(newTask);
             break;
-        case "event":
+        case EVENT_COMMAND:
             newTask= new Event(usercommands.getCommandDescription(), usercommands.getCommandTime());
             arrayOfTasks.add(newTask);
             setNumberOfTasks(getNumberOfTasks() + 1);
             printAddTaskMessage(newTask);
             break;
-        case "error":
+        case ERROR_COMMAND:
             System.out.println("Please enter your command again!");
             break;
         default:

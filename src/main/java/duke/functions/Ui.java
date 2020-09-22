@@ -1,6 +1,6 @@
 package duke.functions;
 
-public class DefaultMessages {
+public class Ui {
 
     public static void showGreet() {
         System.out.println("Hello! I'm Duke");
