@@ -40,7 +40,7 @@ public class AnalyseCommand {
     public void setCommandType(String input) {
         if (input.contains(" ")) {
             String[] commandType = input.split(" ");
-            this.commandType = commandType[0].toLowerCase();
+            this.commandType = commandType[0].toUpperCase();
         } else {
             this.commandType = input.toUpperCase();
         }
