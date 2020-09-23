@@ -1,4 +1,4 @@
 package duke.functions;
 
-public class Ui {
+public class TextUi {
 }

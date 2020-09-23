@@ -6,8 +6,8 @@ import duke.functions.TaskList;
 
 import static duke.functions.AnalyseCommand.isBye;
 import static duke.functions.AnalyseCommand.isList;
-import static duke.functions.Ui.showGreet;
-import static duke.functions.Ui.showBye;
+import static duke.functions.DefaultMessages.showGreet;
+import static duke.functions.DefaultMessages.showBye;
 
 public class Duke {
     public static void main(String[] args) {

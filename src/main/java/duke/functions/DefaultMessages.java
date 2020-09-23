@@ -1,6 +1,9 @@
 package duke.functions;
 
-public class Ui {
+/**
+ * Container for user visible messages
+ */
+public class DefaultMessages {
 
     public static void showGreet() {
         System.out.println("Hello! I'm Duke");
