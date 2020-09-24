@@ -74,7 +74,7 @@ public class FileIO {
             processedElements = taskLine.split("\\| ");
             taskType = processedElements[0];
             isDone = processedElements[1];
-            description = processedElements[2];
+            description = processedElements[2].trim();
 
             if (processedElements.length == 4) {
                 time = processedElements[3];

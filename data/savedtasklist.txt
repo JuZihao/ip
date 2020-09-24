@@ -1,1 +1,4 @@
-[E] | 0 | CS2113 lecture  | Friday 18 September 2020 from 4 pm to 6
+[T] | 0 | this
+[T] | 0 | that
+[E] | 0 | this | 2pm
+[D] | 0 | that | 3pm
