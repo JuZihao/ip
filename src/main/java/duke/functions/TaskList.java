@@ -3,6 +3,8 @@ package duke.functions;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import static java.util.stream.Collectors.toList;
+
 import duke.datatypes.Deadline;
 import duke.datatypes.Event;
 import duke.datatypes.Task;
@@ -13,11 +15,9 @@ public class TaskList {
     private final FileIO savedTextFile = new FileIO("data/savedtasklist.txt");
     private int numberOfTasks;
 
-    private final String DONE_COMMAND = "DONE";
     private final String TODO_COMMAND = "TODO";
     private final String EVENT_COMMAND = "EVENT";
     private final String DEADLINE_COMMAND = "DEADLINE";
-    private final String DELETE_COMMAND = "DELETE";
     private final String ERROR_COMMAND = "ERROR";
 
     public TaskList() {
@@ -37,7 +37,7 @@ public class TaskList {
             System.out.println("OOPS!!! No task added yet.");
         } else {
             System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i<arrayOfTasks.size();i++){
+            for (int i = 0; i < arrayOfTasks.size(); i++){
                 Task currentTask = arrayOfTasks.get(i);
                 System.out.println(i+1 + "." + currentTask.toString());
             }
@@ -148,6 +148,17 @@ public class TaskList {
             System.out.println("Done! All tasks loaded!");
         } catch (FileNotFoundException e) {
             System.out.println("The file you try to load does not exist!");
+        }
+    }
+
+    public void findByKeyword(String keyword) {
+        ArrayList<Task> filteredTaskList = (ArrayList<Task>) arrayOfTasks.stream()
+                .filter((s) -> s.getDescription().contains(keyword))
+                .collect(toList());
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < filteredTaskList.size(); i++){
+            Task currentTask = filteredTaskList.get(i);
+            System.out.println(i+1 + "." + currentTask.toString());
         }
     }
 }

@@ -1,5 +1,6 @@
 package duke.functions;
 
+
 /**
  * Container for user visible messages
  */

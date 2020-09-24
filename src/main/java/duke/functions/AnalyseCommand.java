@@ -13,6 +13,7 @@ public class AnalyseCommand {
     private final String EVENT_COMMAND = "EVENT";
     private final String DEADLINE_COMMAND = "DEADLINE";
     private final String DELETE_COMMAND = "DELETE";
+    private final String FIND_COMMAND = "FIND";
 
     /** Set any command that is not valid to ERROR */
     private final String ERROR_COMMAND = "ERROR";
@@ -66,7 +67,7 @@ public class AnalyseCommand {
                 System.out.println("OOPS!!! The description of" + article + getCommandType() + " cannot be empty.");
                 setCommandType(ERROR_COMMAND);
             }
-        } else if (isToDo()||isDone()||isDelete()) {
+        } else if (isToDo()||isDone()||isDelete()||isFind()) {
             try {
                 String[] commandDescription = input.trim().split(" ", 2);
                 this.commandDescription = commandDescription[1];
@@ -130,6 +131,7 @@ public class AnalyseCommand {
         return getCommandType().equals(DELETE_COMMAND);
     }
 
-
-
+    public boolean isFind() {
+        return getCommandType().equals(FIND_COMMAND);
+    }
 }
