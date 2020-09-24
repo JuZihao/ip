@@ -1,8 +1,12 @@
 package duke.datatypes;
 
+/**
+ * Represents a deadline in the task list.
+ * Guarantees: description and time are present and not null.
+ */
 public class Deadline extends Task {
 
-    private final String DEADLINE_SIGN = "[D]";
+    public static final String DEADLINE_SIGN = "[D]";
     protected String deadlineBy;
 
     public Deadline(String description, String deadlineBy) {

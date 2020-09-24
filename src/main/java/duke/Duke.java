@@ -1,11 +1,11 @@
 package duke;
 
 import java.util.Scanner;
-import duke.functions.AnalyseCommand;
+import duke.functions.Command;
 import duke.functions.TaskList;
 
-import static duke.functions.AnalyseCommand.isBye;
-import static duke.functions.AnalyseCommand.isList;
+import static duke.functions.Command.isBye;
+import static duke.functions.Command.isList;
 import static duke.functions.DefaultMessages.showGreet;
 import static duke.functions.DefaultMessages.showBye;
 
@@ -20,7 +20,7 @@ public class Duke {
 
         while (true) {
             input = in.nextLine();
-            AnalyseCommand userCommands = new AnalyseCommand(input);
+            Command userCommands = new Command(input);
             if (isBye(input)) {
                 break;
             } else if (isList(input)) {

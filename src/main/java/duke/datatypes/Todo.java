@@ -1,8 +1,12 @@
 package duke.datatypes;
 
+/**
+ * Represents a to do in the task list.
+ * Guarantees: description is present and not null.
+ */
 public class Todo extends Task {
 
-    private final String TODO_SIGN = "[T]";
+    public static final String TODO_SIGN = "[T]";
 
     public Todo(String description) {
         super(description);

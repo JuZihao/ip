@@ -1,8 +1,12 @@
 package duke.datatypes;
 
+/**
+ * Represents an event in the task list.
+ * Guarantees: description and time are present and not null.
+ */
 public class Event extends Task {
 
-    private final String EVENT_SIGN = "[E]";
+    public static final String EVENT_SIGN = "[E]";
     protected String eventAt;
 
     public Event(String description, String eventAt) {
