@@ -3,35 +3,53 @@ package duke.functions;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import static duke.functions.Command.*;
 import static java.util.stream.Collectors.toList;
 
 import duke.datatypes.Deadline;
 import duke.datatypes.Event;
 import duke.datatypes.Task;
 import duke.datatypes.Todo;
+import static duke.functions.FileIO.DEFAULT_STORAGE_FILEPATH;
 
+
+/**
+ * A list of tasks. Does not allow the description or time of the task to be empty.
+ */
 public class TaskList {
     private ArrayList<Task> arrayOfTasks = new ArrayList<>();
-    private final FileIO savedTextFile = new FileIO("data/savedtasklist.txt");
+    private final FileIO savedTextFile = new FileIO(DEFAULT_STORAGE_FILEPATH);
     private int numberOfTasks;
 
-    private final String TODO_COMMAND = "TODO";
-    private final String EVENT_COMMAND = "EVENT";
-    private final String DEADLINE_COMMAND = "DEADLINE";
-    private final String ERROR_COMMAND = "ERROR";
-
+    /**
+     * Constructs empty task list.
+     */
     public TaskList() {
         setNumberOfTasks(0);
     }
 
+    /**
+     * Retrieve the number of tasks in the list currently.
+     *
+     * @return number of tasks in the list
+     */
     public int getNumberOfTasks() {
         return numberOfTasks;
     }
 
+    /**
+     * Set the number of task in the list.
+     *
+     * @param numberOfTasks current number of tasks
+     */
     public void setNumberOfTasks(int numberOfTasks) {
         this.numberOfTasks=numberOfTasks;
     }
 
+    /**
+     * Display all current tasks to the user.
+     */
     public void printAllTasks() {
         if(arrayOfTasks.isEmpty()) {
             System.out.println("OOPS!!! No task added yet.");
@@ -44,7 +62,13 @@ public class TaskList {
         }
     }
 
-    public void addTask(AnalyseCommand usercommands) {
+    /**
+     * Add tasks into the list if it is one of the task commands.
+     * Return error message if the user command is not any of the command words.
+     *
+     * @param usercommands user's input
+     */
+    public void addTask(Command usercommands) {
 
         Task newTask;
 
@@ -76,6 +100,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Display what task was added into the list and the number of tasks in the list currently.
+     *
+     * @param newTask new task added
+     */
     private void printAddTaskMessage(Task newTask) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + newTask.toString());
@@ -86,6 +115,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Remove the task stated by the user's input
+     *
+     * @param usercommands user's input
+     */
     public void deleteTask(String usercommands) {
         try {
             int taskToBeDeleted = Integer.parseInt(usercommands);
@@ -100,6 +134,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Display what task is removed and the number of tasks left in the list currently
+     *
+     * @param taskToBeDeleted task to be deleted
+     */
     private void printDeleteTaskMessage(Task taskToBeDeleted) {
         System.out.println("Noted. I've removed this task:");
         System.out.println("  " + taskToBeDeleted.toString());
@@ -111,7 +150,11 @@ public class TaskList {
         }
     }
 
-
+    /**
+     * Set the task stated by the user's input to be done.
+     *
+     * @param input user's input
+     */
     public void setTaskAsDone(String input) {
         try {
             int taskToBeDone = Integer.parseInt(input);
@@ -132,6 +175,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Save the current task list as a text file.
+     */
     public void saveTasksAsText() {
         try {
             savedTextFile.saveAsTextFile(arrayOfTasks);
@@ -141,6 +187,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Load the saved text file as the current task list.
+     */
     public void loadSavedTasks() {
         try {
             arrayOfTasks = savedTextFile.loadSavedFile();
@@ -151,6 +200,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Find and display all the tasks that contains the keyword stated by the user.
+     *
+     * @param keyword word that user want to find in the task list
+     */
     public void findByKeyword(String keyword) {
         ArrayList<Task> filteredTaskList = (ArrayList<Task>) arrayOfTasks.stream()
                 .filter((s) -> s.getDescription().contains(keyword))

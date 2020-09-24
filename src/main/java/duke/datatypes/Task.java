@@ -1,5 +1,8 @@
 package duke.datatypes;
 
+/**
+ * Represents a valid task.
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
