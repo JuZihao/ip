@@ -1,4 +1,0 @@
-[T] | 0 | this
-[T] | 0 | that
-[E] | 0 | this | 2pm
-[D] | 0 | that | 3pm

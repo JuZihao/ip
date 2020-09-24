@@ -1,5 +1,9 @@
 package duke.functions;
 
+
+/**
+ * Container for user visible messages
+ */
 public class DefaultMessages {
 
     public static void showGreet() {
