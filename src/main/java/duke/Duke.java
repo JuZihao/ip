@@ -3,26 +3,38 @@ package duke;
 import java.util.Scanner;
 import duke.functions.Command;
 import duke.functions.TaskList;
+import duke.functions.TextUi;
 
 import static duke.functions.Command.isBye;
 import static duke.functions.Command.isList;
-import static duke.functions.DefaultMessages.showGreet;
-import static duke.functions.DefaultMessages.showBye;
 
+/**
+ * Entry point of the Duke application.
+ * Initializes the application and starts the interaction with the user.
+ */
 public class Duke {
-    public static void main(String[] args) {
+    private TextUi ui;
+    private TaskList currentTaskList;
+
+    public Duke() {
+        this.ui = new TextUi();
+        this.currentTaskList = new TaskList();
+        currentTaskList.loadSavedTasks();
+        ui.showGreetMessage();
+    }
+
+    /** Runs the program until user inputs bye. */
+    public void run() {
         String input;
         Scanner in = new Scanner(System.in);
         TaskList currentTaskList = new TaskList();
 
-        showGreet();
-        currentTaskList.loadSavedTasks();
-
-        while (true) {
+        boolean isBye = false;
+        while(!isBye) {
             input = in.nextLine();
             Command userCommands = new Command(input);
             if (isBye(input)) {
-                break;
+                isBye = isBye(input);
             } else if (isList(input)) {
                 currentTaskList.printAllTasks();
             } else if (userCommands.isDone()) {
@@ -36,6 +48,9 @@ public class Duke {
             }
         }
         currentTaskList.saveTasksAsText();
-        showBye();
+        ui.showByeMessage();
+    }
+    public static void main(String[] args) {
+        new Duke().run();
     }
 }
