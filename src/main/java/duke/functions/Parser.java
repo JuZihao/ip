@@ -30,8 +30,6 @@ public class Parser {
     protected static final String DELETE_COMMAND = "DELETE";
     protected static final String FIND_COMMAND = "FIND";
 
-    /** Set any command that is not valid to ERROR */
-    protected static final String ERROR_COMMAND = "ERROR";
     /** String to separate the time from the whole event command */
     private final String EVENT_SEPARATOR = "/at";
     /** String to separate the time from the whole deadline command */
