@@ -1,39 +1,60 @@
 package duke;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
-import duke.functions.AnalyseCommand;
+
+import duke.commands.Command;
+import duke.exceptions.InvalidCommandException;
+import duke.exceptions.UnknownCommandException;
+import duke.functions.FileIO;
+import duke.functions.Parser;
 import duke.functions.TaskList;
+import duke.functions.TextUi;
 
-import static duke.functions.AnalyseCommand.isBye;
-import static duke.functions.AnalyseCommand.isList;
-import static duke.functions.Ui.showGreet;
-import static duke.functions.Ui.showBye;
+import static duke.functions.FileIO.DEFAULT_STORAGE_FILEPATH;
+import static duke.functions.Parser.isBye;
 
+/**
+ * Entry point of the Duke application.
+ * Initializes the application and starts the interaction with the user.
+ */
 public class Duke {
-    public static void main(String[] args) {
-        String input;
-        Scanner in = new Scanner(System.in);
-        TaskList currentTaskList = new TaskList();
+    private FileIO storage;
+    private TextUi ui;
+    private TaskList currentTaskList;
 
-        showGreet();
-        currentTaskList.loadSavedTasks();
-
-        while (true) {
-            input = in.nextLine();
-            AnalyseCommand userCommands = new AnalyseCommand(input);
-            if (isBye(input)) {
-                break;
-            } else if (isList(input)) {
-                currentTaskList.printAllTasks();
-            } else if (userCommands.isDone()) {
-                currentTaskList.setTaskAsDone(userCommands.getCommandDescription());
-            } else if (userCommands.isDelete()) {
-                currentTaskList.deleteTask(userCommands.getCommandDescription());
-            } else {
-                currentTaskList.addTask(userCommands);
-            }
+    public Duke(String fileName) {
+        this.ui = new TextUi();
+        this.storage = new FileIO(fileName);
+        try {
+            currentTaskList = new TaskList(storage.loadSavedFile());
+            ui.showLoadSuccess();
+        } catch (FileNotFoundException e) {
+            ui.showLoadError();
+            currentTaskList = new TaskList();
         }
-        currentTaskList.saveTasksAsText();
-        showBye();
+        ui.showGreetMessage();
+    }
+
+    /** Runs the program until user inputs bye. */
+    public void run() {
+        Scanner in = new Scanner(System.in);
+        boolean isBye = false;
+        while(!isBye) {
+            String input = in.nextLine();
+            try {
+                Parser parser = new Parser(input);
+                Command c = parser.parseCommand(input);
+                c.execute(currentTaskList, parser, ui, storage);
+            } catch (UnknownCommandException e) {
+                ui.showUnknownCommandError();
+            } catch (InvalidCommandException e) {
+                ui.showInvalidInput();
+            }
+            isBye = isBye(input);
+        }
+    }
+    public static void main(String[] args) {
+        new Duke(DEFAULT_STORAGE_FILEPATH).run();
     }
 }

@@ -1,22 +1,28 @@
 package duke.datatypes;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+/**
+ * Represents a deadline in the task list.
+ * Guarantees: description and time are present and not null.
+ */
 public class Deadline extends Task {
 
-    private final String DEADLINE_SIGN = "[D]";
-    protected String deadlineBy;
+    public static final String DEADLINE_SIGN = "[D]";
+    protected LocalDate deadlineBy;
 
-    public Deadline(String description, String deadlineBy) {
+    public Deadline(String description, LocalDate deadlineBy) {
         super(description);
         setDeadlineBy(deadlineBy);
     }
 
-    public void setDeadlineBy(String deadlineBy) {
-        String by = deadlineBy.replace("by ","");
-        this.deadlineBy = by;
+    public void setDeadlineBy(LocalDate deadlineBy) {
+        this.deadlineBy = deadlineBy;
     }
 
     public String getDeadlineBy() {
-        return deadlineBy;
+        return deadlineBy.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     @Override
@@ -25,8 +31,8 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String getTime() {
-        return getDeadlineBy();
+    public LocalDate getTime() {
+        return deadlineBy;
     }
 
     @Override

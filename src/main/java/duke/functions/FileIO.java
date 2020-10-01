@@ -8,16 +8,24 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static duke.datatypes.Deadline.DEADLINE_SIGN;
+import static duke.datatypes.Event.EVENT_SIGN;
+import static duke.datatypes.Todo.TODO_SIGN;
+
+/**
+ * Represents the file used to store task list data.
+ */
 public class FileIO {
-    private final String TODO_SIGN = "[T]";
-    private final String EVENT_SIGN = "[E]";
-    private final String DEADLINE_SIGN = "[D]";
+    private String fileName;
     private final String TEXT_DIVIDER = " | ";
     private final String NEW_LINE = "\n";
-    private String fileName;
+
+    /** Default file path used. */
+    public static final String DEFAULT_STORAGE_FILEPATH = "data/savedtasklist.txt";
 
     public FileIO (String fileName) {
         setFileName(fileName);
@@ -31,6 +39,9 @@ public class FileIO {
         this.fileName = fileName;
     }
 
+    /**
+     * Saves the {@code TaskList} data to the storage file.
+     */
     public void saveAsTextFile (ArrayList<Task> arrayOfTasks) throws IOException {
         FileWriter fw = new FileWriter(fileName);
         String textToAdd = "";
@@ -42,6 +53,12 @@ public class FileIO {
         fw.close();
     }
 
+    /**
+     * Converts each task to text format that can be saved into the text file.
+     *
+     * @param taskToBeChanged task that has to be converted
+     * @return converted task
+     */
     public String changeTaskToText (Task taskToBeChanged) {
         String taskAsTXT = "";
         taskAsTXT += taskToBeChanged.getTaskSign();
@@ -57,6 +74,12 @@ public class FileIO {
         return taskAsTXT;
     }
 
+    /**
+     * Loads the {@code TaskList} data from this storage file, and then returns it.
+     * Returns an empty {@code TaskList} if the file does not exist.
+     *
+     * @throws FileNotFoundException if there is no saved text file available
+     */
     public ArrayList<Task> loadSavedFile() throws FileNotFoundException {
         File savedFile = new File(fileName);
         Scanner in = new Scanner(savedFile);
@@ -74,7 +97,7 @@ public class FileIO {
             processedElements = taskLine.split("\\| ");
             taskType = processedElements[0];
             isDone = processedElements[1];
-            description = processedElements[2];
+            description = processedElements[2].trim();
 
             if (processedElements.length == 4) {
                 time = processedElements[3];
@@ -85,10 +108,10 @@ public class FileIO {
                 savedTaskToAdd = new Todo(description);
                 break;
             case EVENT_SIGN:
-                savedTaskToAdd = new Event(description,time);
+                savedTaskToAdd = new Event(description,LocalDate.parse(time));
                 break;
             case DEADLINE_SIGN:
-                savedTaskToAdd = new Deadline(description,time);
+                savedTaskToAdd = new Deadline(description, LocalDate.parse(time));
                 break;
             default:
                 break;
