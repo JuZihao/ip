@@ -6,9 +6,9 @@ import duke.functions.Parser;
 import duke.functions.TaskList;
 import duke.functions.TextUi;
 
-import java.util.ArrayList;
-
 import static duke.functions.DefaultMessages.PRINT_LIST_MESSAGE;
+
+import java.util.ArrayList;
 
 /**
  * Show the current task list to the user.

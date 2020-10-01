@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.datatypes.Deadline;
 import duke.datatypes.Task;
-import duke.exceptions.DateFormatException;
 import duke.functions.FileIO;
 import duke.functions.Parser;
 import duke.functions.TaskList;
