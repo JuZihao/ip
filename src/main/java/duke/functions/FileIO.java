@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,7 +25,7 @@ public class FileIO {
     private final String NEW_LINE = "\n";
 
     /** Default file path used. */
-    protected static final String DEFAULT_STORAGE_FILEPATH = "data/savedtasklist.txt";
+    public static final String DEFAULT_STORAGE_FILEPATH = "data/savedtasklist.txt";
 
     public FileIO (String fileName) {
         setFileName(fileName);
@@ -107,10 +108,10 @@ public class FileIO {
                 savedTaskToAdd = new Todo(description);
                 break;
             case EVENT_SIGN:
-                savedTaskToAdd = new Event(description,time);
+                savedTaskToAdd = new Event(description,LocalDate.parse(time));
                 break;
             case DEADLINE_SIGN:
-                savedTaskToAdd = new Deadline(description,time);
+                savedTaskToAdd = new Deadline(description, LocalDate.parse(time));
                 break;
             default:
                 break;

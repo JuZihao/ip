@@ -1,56 +1,60 @@
 package duke;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
-import duke.functions.Command;
+
+import duke.commands.Command;
+import duke.exceptions.InvalidCommandException;
+import duke.exceptions.UnknownCommandException;
+import duke.functions.FileIO;
+import duke.functions.Parser;
 import duke.functions.TaskList;
 import duke.functions.TextUi;
 
-import static duke.functions.Command.isBye;
-import static duke.functions.Command.isList;
+import static duke.functions.FileIO.DEFAULT_STORAGE_FILEPATH;
+import static duke.functions.Parser.isBye;
 
 /**
  * Entry point of the Duke application.
  * Initializes the application and starts the interaction with the user.
  */
 public class Duke {
+    private FileIO storage;
     private TextUi ui;
     private TaskList currentTaskList;
 
-    public Duke() {
+    public Duke(String fileName) {
         this.ui = new TextUi();
-        this.currentTaskList = new TaskList();
-        currentTaskList.loadSavedTasks();
+        this.storage = new FileIO(fileName);
+        try {
+            currentTaskList = new TaskList(storage.loadSavedFile());
+            ui.showLoadSuccess();
+        } catch (FileNotFoundException e) {
+            ui.showLoadError();
+            currentTaskList = new TaskList();
+        }
         ui.showGreetMessage();
     }
 
     /** Runs the program until user inputs bye. */
     public void run() {
-        String input;
         Scanner in = new Scanner(System.in);
-        TaskList currentTaskList = new TaskList();
-
         boolean isBye = false;
         while(!isBye) {
-            input = in.nextLine();
-            Command userCommands = new Command(input);
-            if (isBye(input)) {
-                isBye = isBye(input);
-            } else if (isList(input)) {
-                currentTaskList.printAllTasks();
-            } else if (userCommands.isDone()) {
-                currentTaskList.setTaskAsDone(userCommands.getCommandDescription());
-            } else if (userCommands.isDelete()) {
-                currentTaskList.deleteTask(userCommands.getCommandDescription());
-            } else if(userCommands.isFind()) {
-                currentTaskList.findByKeyword(userCommands.getCommandDescription());
-            } else {
-                currentTaskList.addTask(userCommands);
+            String input = in.nextLine();
+            try {
+                Parser parser = new Parser(input);
+                Command c = parser.parseCommand(input);
+                c.execute(currentTaskList, parser, ui, storage);
+            } catch (UnknownCommandException e) {
+                ui.showUnknownCommandError();
+            } catch (InvalidCommandException e) {
+                ui.showInvalidInput();
             }
+            isBye = isBye(input);
         }
-        currentTaskList.saveTasksAsText();
-        ui.showByeMessage();
     }
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke(DEFAULT_STORAGE_FILEPATH).run();
     }
 }

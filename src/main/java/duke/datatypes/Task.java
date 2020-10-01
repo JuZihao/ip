@@ -1,5 +1,7 @@
 package duke.datatypes;
 
+import java.time.LocalDate;
+
 /**
  * Represents a valid task.
  */
@@ -41,7 +43,7 @@ public abstract class Task {
 
     public abstract String getTaskSign();
 
-    public abstract String getTime();
+    public abstract LocalDate getTime();
 
 
     @Override

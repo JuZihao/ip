@@ -1,5 +1,7 @@
 package duke.datatypes;
 
+import java.time.LocalDate;
+
 /**
  * Represents a to do in the task list.
  * Guarantees: description is present and not null.
@@ -18,7 +20,7 @@ public class Todo extends Task {
     }
 
     @Override
-    public String getTime() {
+    public LocalDate getTime() {
         return null;
     }
 

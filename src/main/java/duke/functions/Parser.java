@@ -1,9 +1,21 @@
 package duke.functions;
 
+import duke.commands.Command;
+import duke.commands.ByeCommand;
+import duke.commands.DeadlineCommand;
+import duke.commands.EventCommand;
+import duke.commands.TodoCommand;
+import duke.commands.DoneCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.DeleteCommand;
+import duke.exceptions.InvalidCommandException;
+import duke.exceptions.UnknownCommandException;
+
 /**
  * Analyse the user's input and set it as different parts that will be passed to other functions
  */
-public class Command {
+public class Parser {
 
     protected String commandType;
     protected String commandDescription;
@@ -27,10 +39,12 @@ public class Command {
 
     /**
      * User's input is being analysed and split into different part.
+     * Parses user inputs into commands.
      *
      * @param input user's full input
+     * @throws InvalidCommandException if the command entered is not valid
      */
-    public Command(String input) {
+    public Parser(String input) throws InvalidCommandException {
         setCommandType(input.trim());
         setCommandDescription(input.trim());
         setCommandTime(input.trim());
@@ -64,25 +78,23 @@ public class Command {
      * is specified it will be set to "No description!"
      *
      * @param input user's full input
+     * @throws InvalidCommandException if the command entered is not valid
      */
-    public void setCommandDescription(String input) {
+    public void setCommandDescription(String input) throws InvalidCommandException {
         if (isEvent()||isDeadline()) {
             try {
                 String[] commandDescription = input.trim().split(" ", 2);
                 String[] descriptionWithoutTime = commandDescription[1].split("/");
                 this.commandDescription = descriptionWithoutTime[0].trim();
             } catch (ArrayIndexOutOfBoundsException e) {
-                String article = isEvent() ? " an " : " a ";
-                System.out.println("OOPS!!! The description of" + article + getCommandType() + " cannot be empty.");
-                setCommandType(ERROR_COMMAND);
+                throw new InvalidCommandException();
             }
         } else if (isToDo()||isDone()||isDelete()||isFind()) {
             try {
                 String[] commandDescription = input.trim().split(" ", 2);
                 this.commandDescription = commandDescription[1];
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("OOPS!!! The description of a " + getCommandType() + " cannot be empty.");
-                setCommandType(ERROR_COMMAND);
+                throw new InvalidCommandException();
             }
         } else {
             this.commandDescription = "No description!";
@@ -102,16 +114,16 @@ public class Command {
      * Spilt user's input and get the time of the task if no task is specified it will be set to "No given time!"
      *
      * @param input user's full input
+     * @throws InvalidCommandException if the command entered is not valid
      */
-    public void setCommandTime(String input) {
+    public void setCommandTime(String input) throws InvalidCommandException{
         if (isDeadline()||isEvent()) {
             String timeSeparator = isDeadline() ? DEADLINE_SEPARATOR:EVENT_SEPARATOR;
             try {
                 String[] commandTime = input.split(timeSeparator);
                 this.commandTime = commandTime[1].trim();
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("OOPS!!! The time of your " + getCommandType() + " is invalid.");
-                setCommandType(ERROR_COMMAND);
+                throw new InvalidCommandException();
             }
         } else {
             this.commandTime = "No given time!";
@@ -125,6 +137,33 @@ public class Command {
      */
     public String getCommandTime() {
         return this.commandTime;
+    }
+
+    public Command parseCommand(String input) throws UnknownCommandException {
+        String CommandType = getCommandType();
+
+        if (isBye(input)) {
+            return new ByeCommand();
+        } else if (isList(input)) {
+            return new ListCommand();
+        }
+
+        switch (CommandType) {
+        case DONE_COMMAND:
+            return new DoneCommand();
+        case EVENT_COMMAND:
+            return new EventCommand();
+        case TODO_COMMAND:
+            return new TodoCommand();
+        case DEADLINE_COMMAND:
+            return new DeadlineCommand();
+        case DELETE_COMMAND:
+            return new DeleteCommand();
+        case FIND_COMMAND:
+            return new FindCommand();
+        default:
+            throw  new UnknownCommandException();
+        }
     }
 
     /**
