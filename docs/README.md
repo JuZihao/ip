@@ -22,6 +22,14 @@ Other functions include `List`, `Find` and `Delete`.
 ### Starting the program
 When the program _Duke_ start, it will attempt to locate a file called `savedtasklist.txt` and attempt to load previously saved tasks into your current task list.
 
+Expected outcome:
+```
+Done! All tasks loaded!
+===================================================
+Hello! I'm Duke.
+What can I do for you?
+===================================================
+```
 ### Adding a task to track
 There are three types of task that you can add into your task list. They are `Event`, `Deadline` and `ToDo`. All three task requires you to provide a name for it. `Event` and `Deadline` requires you to specify a time of the task. 
 
