@@ -22,6 +22,14 @@ Other functions include `List`, `Find` and `Delete`.
 ### Starting the program
 When the program _Duke_ start, it will attempt to locate a file called `savedtasklist.txt` and attempt to load previously saved tasks into your current task list.
 
+Expected outcome:
+```
+Done! All tasks loaded!
+===================================================
+Hello! I'm Duke.
+What can I do for you?
+===================================================
+```
 ### Adding a task to track
 There are three types of task that you can add into your task list. They are `Event`, `Deadline` and `ToDo`. All three task requires you to provide a name for it. `Event` and `Deadline` requires you to specify a time of the task. 
 
@@ -39,7 +47,7 @@ Todo gym excercise
 Expected outcome:
 ```
 New task added:
-	[T][✗] CS2113 Tutorial
+    [T][✗] CS2113 Tutorial
 I'll keep track of it for you!
 ```
 
@@ -50,14 +58,16 @@ Format of `Event`:
 
 `Event` {Task Name} /at {Event Time}
 
+**Note :** Event time should be of the format YYYY-MM-DD 
+
 Example of usage: 
 ```
-Event CS2101 meeting /at Friday 2 October
+Event CS2101 meeting /at 2020-10-01
 ```
 Expected outcome:
 ```
 New task added:
-	[E][✗] CS2101 meeting (at: Friday 2 October)
+    [E][✗] CS2101 meeting (at: Oct 1 2020)
 I'll keep track of it for you!
 ```
 
@@ -66,9 +76,9 @@ Duke will  attempt to add a task of type `Deadline` with the name and time you p
 
 Format of `Deadline`:
 
-`Deadline` {Task Name} /by {Event Time}
+`Deadline` {Task Name} /by {Deadline Time}
 
-**Note :** Deadline Details should be of the format YYYY-MM-DD 
+**Note :** Deadline time should be of the format YYYY-MM-DD 
 
 Example of usage: 
 ```
@@ -77,7 +87,7 @@ Deadline IP V0.2 /by 2020-10-02
 Expected outcome:
 ```
 New task added:
-	[D][✗] IP V0.2 (by: Oct 2 2020)
+    [D][✗] IP V0.2 (by: Oct 2 2020)
 I'll keep track of it for you!
 ```
 
@@ -95,7 +105,7 @@ Done 1
 Expected outcome:
 ```
 Nice! I've marked this task as done:
-   [D][✓] CS2113 Tutorial
+   [T][✓] CS2113 Tutorial
 ```
 
 ### Displaying task list
@@ -109,7 +119,7 @@ Expected outcome:
 ```
 Here are the tasks in your list:
 1. [T][✓] CS2113 Tutorial
-2. [E][✗] CS2101 meeting (at: Friday 2 October)
+2. [E][✗] CS2101 meeting (at: Oct 1 2020)
 3. [D][✗] IP V0.2 (by: Oct 2 2020)
 ----------------------------------------------------
 ```
@@ -128,7 +138,7 @@ Delete 1
 Expected outcome:
 ```
 Noted. I've removed this task:
-   [D][✓] CS2113 Tutorial
+    [T][✓] CS2113 Tutorial
 ```
 
 ### Finding a task in the task list
@@ -145,7 +155,7 @@ Find IP
 Expected outcome:
 ```
 Here are the matching tasks in your list:
-   [D][✗] IP V0.2 (by: Oct 2 2020)
+    [D][✗] IP V0.2 (by: Oct 2 2020)
 ```
 
 ### Exiting the program
@@ -160,7 +170,10 @@ bye
 Expected outcome:
 ```
 Done! All tasks saved!
-Bye! Hope to see you soon!
+===================================================
+Good bye!
+===================================================
+===================================================
 ```
 
 ## End of user guide
