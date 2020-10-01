@@ -50,6 +50,8 @@ Format of `Event`:
 
 `Event` {Task Name} /at {Event Time}
 
+**Note :** Event time should be of the format YYYY-MM-DD 
+
 Example of usage: 
 ```
 Event CS2101 meeting /at 2020-10-01
@@ -66,9 +68,9 @@ Duke will  attempt to add a task of type `Deadline` with the name and time you p
 
 Format of `Deadline`:
 
-`Deadline` {Task Name} /by {Event Time}
+`Deadline` {Task Name} /by {Deadline Time}
 
-**Note :** Deadline Details should be of the format YYYY-MM-DD 
+**Note :** Deadline time should be of the format YYYY-MM-DD 
 
 Example of usage: 
 ```
@@ -95,7 +97,7 @@ Done 1
 Expected outcome:
 ```
 Nice! I've marked this task as done:
-   [D][✓] CS2113 Tutorial
+   [T][✓] CS2113 Tutorial
 ```
 
 ### Displaying task list
@@ -128,7 +130,7 @@ Delete 1
 Expected outcome:
 ```
 Noted. I've removed this task:
-    [D][✓] CS2113 Tutorial
+    [T][✓] CS2113 Tutorial
 ```
 
 ### Finding a task in the task list
