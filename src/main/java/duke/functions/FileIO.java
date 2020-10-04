@@ -25,7 +25,7 @@ public class FileIO {
     private final String NEW_LINE = "\n";
 
     /** Default file path used. */
-    public static final String DEFAULT_STORAGE_FILEPATH = "data/savedtasklist.txt";
+    public static final String DEFAULT_STORAGE_FILEPATH = "savedtasklist.txt";
 
     public FileIO (String fileName) {
         setFileName(fileName);
