@@ -19,6 +19,7 @@ public class TaskList {
      * Constructs empty task list.
      */
     public TaskList() {
+        this.arrayOfTasks = new ArrayList<>();
         setNumberOfTasks(0);
     }
 

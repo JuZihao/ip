@@ -30,8 +30,8 @@ public class Duke {
             currentTaskList = new TaskList(storage.loadSavedFile());
             ui.showLoadSuccess();
         } catch (FileNotFoundException e) {
-            ui.showLoadError();
             currentTaskList = new TaskList();
+            ui.showLoadError();
         }
         ui.showGreetMessage();
     }
