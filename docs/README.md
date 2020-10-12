@@ -161,7 +161,8 @@ Find IP
 Expected outcome:
 ```
 Here are the matching tasks in your list:
-    [D][✗] IP V0.2 (by: Oct 2 2020)
+1.[D][✘] IP V0.2 (by: Oct 2 2020)
+===================================================
 ```
 
 ### Exiting the program
