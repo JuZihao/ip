@@ -46,9 +46,10 @@ Todo gym excercise
 ```
 Expected outcome:
 ```
-New task added:
-    [T][✗] CS2113 Tutorial
-I'll keep track of it for you!
+Got it. I've added this task:
+  [T][✘] gym excercise
+Now you have 1 task in the list.
+===================================================
 ```
 
 #### Adding Event task
@@ -66,9 +67,10 @@ Event CS2101 meeting /at 2020-10-01
 ```
 Expected outcome:
 ```
-New task added:
-    [E][✗] CS2101 meeting (at: Oct 1 2020)
-I'll keep track of it for you!
+Got it. I've added this task:
+  [E][✘] CS2101 meeting (at: Oct 1 2020)
+Now you have 2 tasks in the list.
+===================================================
 ```
 
 #### Adding Deadline task
@@ -86,9 +88,10 @@ Deadline IP V0.2 /by 2020-10-02
 ```
 Expected outcome:
 ```
-New task added:
-    [D][✗] IP V0.2 (by: Oct 2 2020)
-I'll keep track of it for you!
+Got it. I've added this task:
+  [D][✘] IP V0.2 (by: Oct 2 2020)
+Now you have 3 tasks in the list.
+===================================================
 ```
 
 ### Setting a task as done
@@ -105,7 +108,8 @@ Done 1
 Expected outcome:
 ```
 Nice! I've marked this task as done:
-   [T][✓] CS2113 Tutorial
+   [T][✓] gym excercise
+===================================================
 ```
 
 ### Displaying task list
@@ -118,10 +122,10 @@ List
 Expected outcome:
 ```
 Here are the tasks in your list:
-1. [T][✓] CS2113 Tutorial
+1. [T][✓] gym excercise
 2. [E][✗] CS2101 meeting (at: Oct 1 2020)
 3. [D][✗] IP V0.2 (by: Oct 2 2020)
-----------------------------------------------------
+===================================================
 ```
 
 ### Deleting a task in the task list
@@ -138,7 +142,9 @@ Delete 1
 Expected outcome:
 ```
 Noted. I've removed this task:
-    [T][✓] CS2113 Tutorial
+  [T][✓] gym excercise
+Now you have 2 tasks in the list.
+===================================================
 ```
 
 ### Finding a task in the task list
